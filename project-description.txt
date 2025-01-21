@@ -1,0 +1,50 @@
+CLI Data Management Tool
+
+" This project is a Command Line Interface (CLI) application developed in Python that allows users to manage their data efficiently. It provides
+various functionalities for interacting with AWS S3 and helps users manage their data, such as uploading, downloading, and listing objects in
+their S3 buckets."
+
+Features
+Connect to AWS S3: Using the boto3 library to interact with Amazon S3 for uploading, downloading, and managing files.
+User-Friendly CLI: The CLI is built with the argparse library to provide clear and simple commands for users.
+Packaging with PyInstaller: The project is packaged as an executable using PyInstaller so users can run it without needing Python installed.
+
+USER GUIDE:
+    - list.exe: List all buckets or all objects in your AWS-S3
+        + help: ./list.exe --help
+        + option 1-list all buckets:  ./list.exe -ab  or ./list.exe --allBuckets
+        EX: ./list.exe -ab
+        + option 2-list all objects: ./list.exe -ao "your_bucket_name"
+        EX: ./list.exe -ao bucket123
+
+    - upload.exe: Upload file from your local(computer) to AWS S3 bucket.
+        + help: ./upload.exe --help
+        + upload file: ./upload.exe "your_file_path" "your_bucket_name" "new_file_name"
+        EX: ./upload.exe "C://Users/image.jpg" "bucket123" "uploaded_image.jpg"
+
+    - download.exe: Download file from AWS-S3 bucket down to your local(computer)
+        + help: ./download.exe --help
+        + download file: ./download.exe "file_in_bucket" "your_bucket_name" "new_file_name_path"
+        EX: ./download.exe "uploaded_image.jpg" "bucket123" "C://Users/downloaded.jpg"
+
+    - copy.exe: On AWS-S3, moving file from one bucket to another bucket
+        + help: ./copy.exe --help
+        + copy file: ./copy.exe "bucket_source" "file_source_name" "bucket_des" "file_des_name"
+        EX: ./copy.exe "bucket123" "uploaded.jpg" "bucket321" "copied.jpg"
+
+    - backup.exe: Backup all files from a specific bucket on S3 by downloading and compressing them into a only zip file.
+        + help: ./backup.exe --help
+        + backup all files: ./backup.exe "bucket_name" "compressing_path"
+        EX: ./backup.exe "bucket123" "C://Users/zipping/myzipfile.zip"
+
+    - url.exe: Creating a temporary link to access to your S3 file
+        + help: ./url.exe --help
+        + presign url: ./url.exe "bucket_name" "file_name" "expiration_time(in seconds)"
+        EX: ./url.exe "bucket123" "upload.jpg" 3600
+
+
+Requirements
++ Python 3.x
++ argparse (for CLI argument parsing)
++ boto3 (for interacting with AWS S3)
++ pyInstaller (for packaging the application as a standalone executable file)
