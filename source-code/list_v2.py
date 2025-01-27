@@ -24,17 +24,17 @@ def list_all_buckets():
         #Sorted buckets with Attribute ["CreationDate"]
         sorted_bucks = sorted(response['Buckets'], key = lambda bucket: bucket['CreationDate'], reverse = True)
         print('All existing AWS S3 buckets: ')
-        print('|-----|-----------------------------------|-------------------|')
-        print('|Index|            Bucket Name            |   Creation Date   |')
-        print('|-----|-----------------------------------|-------------------|')
+        print('|---|-----------------------------------|-------------------|')
+        print('|No.|            Bucket Name            |   Creation Date   |')
+        print('|---|-----------------------------------|-------------------|')
         if 'Buckets' in response:
             for index, bucket in enumerate(sorted_bucks, start = 1):
                 creation_date = bucket['CreationDate']
                 formatted_date = creation_date.strftime('%d/%m/%y %H:%M:%S')
-                print(f"[{index:^5}] {bucket["Name"]:<34}| {formatted_date} |")
+                print(f"[{index:^3}] {bucket["Name"]:<34}| {formatted_date} |")
         else:
             print("No buckets found or not existing.")
-        print('|-----|-----------------------------------|-------------------|\n')
+        print('|---|-----------------------------------|-------------------|\n')
     except Exception as e:
         print(f"Error listing buckets: {e}")
 
@@ -45,9 +45,9 @@ def list_all_objects(bucketName):
         response = s3.list_objects(Bucket=bucketName)
         #Sorted objects in bucket with Attribute Content['Last modified']
         sorted_objs = sorted(response['Contents'], key = lambda obj : obj['LastModified'], reverse = True)
-        print('All existing AWS S3 objects: ')
+        print(f"All existing objects in S3 bucket '{bucketName}'")
         print('|---|-------------------------------|---------------------------|')
-        print('|   |          Object Name          |       Last Modified       |')
+        print('|No.|          Object Name          |       Last Modified       |')
         print('|---|-------------------------------|---------------------------|')
         if 'Contents' in response:
             for index, obj in enumerate(sorted_objs, start = 1):
