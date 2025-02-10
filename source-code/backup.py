@@ -1,18 +1,27 @@
 from argparse import ArgumentParser, Namespace
 import os, boto3, zipfile
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError
+from dotenv import load_dotenv
 
+#=====================================================================
+# Load file .env
+load_dotenv()
 
-# def init_s3_client():
-#     """Khởi tạo boto3 client."""
-#     return boto3.client(
-#         's3',
-#         endpoint_url=os.getenv('ENDPOINT_URL'),
-#         aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-#         aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
-#         region_name=os.getenv('REGION_NAME')
-#     )
-s3 = boto3.client('s3')
+# Read parameter from .env (environment variable)
+ENDPOINT_URL = os.getenv('S3_ENDPOINT')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_REGION = os.getenv('REGION_NAME')
+
+# Initialize s3 client with Endpoint and Authenticate
+s3 = boto3.client(
+  's3',
+        endpoint_url=ENDPOINT_URL,
+        aws_access_key_id = AWS_ACCESS_KEY_ID,
+        aws_secret_access_key = AWS_SECRET_ACCESS_KEY,
+        region_name=AWS_REGION
+)
+#=====================================================================
 
 
 def download_and_zip(bucket_name, output_zip):
