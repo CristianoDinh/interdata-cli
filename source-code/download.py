@@ -1,5 +1,26 @@
 from argparse import ArgumentParser, Namespace
 import boto3, os
+from dotenv import load_dotenv
+
+#=====================================================================
+# Load file .env
+load_dotenv()
+
+# Read parameter from .env (environment variable)
+ENDPOINT_URL = os.getenv('S3_ENDPOINT')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_REGION = os.getenv('REGION_NAME')
+
+# Initialize s3 client with Endpoint and Authenticate
+s3 = boto3.client(
+  's3',
+        endpoint_url=ENDPOINT_URL,
+        aws_access_key_id = AWS_ACCESS_KEY_ID,
+        aws_secret_access_key = AWS_SECRET_ACCESS_KEY,
+        region_name=AWS_REGION
+)
+#=====================================================================
 
 parser = ArgumentParser()
 #parser.usage
@@ -10,7 +31,6 @@ parser.add_argument("bucket_source_name", help = ":S3 bucket source of file to b
 parser.add_argument("new_file_path", help = ":Path and name of the downloaded file", type = str)
 
 args : Namespace = parser.parse_args()
-s3 = boto3.client('s3', region_name='ap-southeast-1')
 
 BUCKET_FILE = args.bucket_file_name
 BUCKET_NAME = args.bucket_source_name
