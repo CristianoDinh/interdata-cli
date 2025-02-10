@@ -1,5 +1,9 @@
 # Ignore build directory
 build/
 
+# Ignore dist directory
+dist/
+
 #Ignore all exe.spec file
 *.exe.spec
+
