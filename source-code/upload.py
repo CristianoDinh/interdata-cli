@@ -1,8 +1,28 @@
 from argparse import ArgumentParser, Namespace
-import boto3
+import boto3, os
+from dotenv import load_dotenv
+
+#=====================================================================
+# Load file .env
+load_dotenv()
+
+# Read parameter from .env (environment variable)
+ENDPOINT_URL = os.getenv('S3_ENDPOINT')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_REGION = os.getenv('REGION_NAME')
+
+# Initialize s3 client with Endpoint and Authenticate
+s3 = boto3.client(
+  's3',
+        endpoint_url=ENDPOINT_URL,
+        aws_access_key_id = AWS_ACCESS_KEY_ID,
+        aws_secret_access_key = AWS_SECRET_ACCESS_KEY,
+        region_name=AWS_REGION
+)
+#=====================================================================
 
 parser = ArgumentParser()
-
 #parser.usage = 'Using the program like this...'
 parser.prog = "./upload.exe"
 parser.description = "Upload your required file from Local -> Cloud Object Storage AWS-S3"
@@ -11,7 +31,6 @@ parser.add_argument("bucket_name", help = ":The S3 bucket will be upload to", ty
 parser.add_argument("new_file_name", help = ":Name of the uploaded file in that bucket", type = str)
 
 args : Namespace = parser.parse_args()
-s3 = boto3.client('s3', region_name = 'ap-southeast-1')
 
 FILE_SOURCE = args.file_source
 BUCKET_NAME = args.bucket_name
