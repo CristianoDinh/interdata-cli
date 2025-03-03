@@ -1,0 +1,88 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #15171c;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: space-between;*/
+  position: fixed;
+}
+
+/* 1. Logo */
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 180px;
+  height: 60px;
+}
+
+/* 2. Option items */
+.items {
+  padding-top: 50px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/*.sidebar ul li i {*/
+/*  font-size: 16px;*/
+/*}*/
+
+.sidebar ul li:hover,
+.sidebar ul li.active {
+  background: darkgoldenrod;
+}
+
+/* 3. Progress bar */
+.storage-info {
+  position: absolute;
+  bottom: 180px;
+  width: 80%;
+
+  padding: 10px 15px 25px;
+  background: #1e2130;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: whitesmoke;
+  border-radius: 5px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.progress {
+  width: 50%;
+  height: 100%;
+  background: #3352ff;
+  border-radius: 5px;
+}
+
