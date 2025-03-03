@@ -7,3 +7,6 @@ dist/
 #Ignore all exe.spec file
 *.exe.spec
 
+#Ignore file .idea
+.idea
+
