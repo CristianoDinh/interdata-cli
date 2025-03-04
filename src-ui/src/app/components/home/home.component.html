@@ -1,0 +1,20 @@
+
+<section class="findings">
+  <form action="">
+    <input type="text" placeholder="Filter by name" #filter>
+    <button class="primary" type="button">Search</button>
+  </form>
+</section>
+
+<section class="results">
+  <app-bucket-object  [bucObjs]="bucketObjectList"></app-bucket-object>
+</section>
+
+<!--<div class="object">-->
+<!--  <ul *ngFor="let b of bucketObjectList">-->
+<!--    <p>{{ b.id }}</p>-->
+<!--    <h2>{{ b.name }}</h2>-->
+<!--    <h3>{{ b.modifiedDate }}</h3>-->
+<!--  </ul>-->
+<!--</div>-->
+

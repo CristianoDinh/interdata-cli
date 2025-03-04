@@ -1,0 +1,14 @@
+.listing {
+  background: burlywood;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.listing:hover {
+  background: brown;
+}
+
+.listing-name {
+  padding: 10px;
+}

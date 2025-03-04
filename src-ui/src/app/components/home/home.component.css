@@ -1,0 +1,35 @@
+/* Put these styles in: src/home/home.component.css */
+
+/* 1. Decorate searching bar */
+.findings {
+  padding-top: 10px;
+  padding-left: 100px;
+}
+
+input[type="text"] {
+  border: solid 1px ;
+  padding: 5px;
+  border-radius: 150px;
+  margin-right: 5px;
+  display: inline-block;
+  width: 20%;
+  margin-left: 40vh;
+}
+
+/* 2. Decorate submit button */
+button {
+  padding: 5px;
+  border: solid 1px ;
+  background: darkgoldenrod;
+  color: whitesmoke;
+  font-style: italic;
+  border-radius: 5px;
+}
+
+.results {
+  margin-left: 250px; /* Đẩy nội dung ra khỏi sidebar */
+  padding: 20px;
+  overflow-x: auto; /* Tránh tràn nội dung */
+}
+
+
