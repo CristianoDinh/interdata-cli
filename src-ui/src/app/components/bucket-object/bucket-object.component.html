@@ -13,7 +13,7 @@
   <tr *ngFor="let bo of bucObjs, let i = index" class="table-info">
     <th scope="row">{{ i + 1 }}</th>
     <td>{{ bo.name }}</td>
-    <td>{{ bo.modifiedDate }}</td>
+    <td>{{ bo.modifiedDate | date:'EEE, MMM d y HH:mm (zzz)' }}</td>
   </tr>
   </tbody>
 </table>
