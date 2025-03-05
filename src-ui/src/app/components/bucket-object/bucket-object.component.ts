@@ -15,7 +15,7 @@ import {FilterObjPipe} from '../../pipes/filter-obj.pipe';
   styleUrl: './bucket-object.component.css'
 })
 export class BucketObjectComponent {
- searchTerm !: string;
+  @Input() searching !: string;
   @Input() bucObjs!: BucketObject[];
 
 }

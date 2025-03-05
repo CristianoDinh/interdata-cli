@@ -1,14 +1,6 @@
-.listing {
-  background: burlywood;
-  border-radius: 5px;
-  padding-bottom: 10px;
-  text-align: center;
+
+.caption {
+  font-weight: bolder;
+  font-family: "Comic Sans MS", cursive;
 }
 
-.listing:hover {
-  background: brown;
-}
-
-.listing-name {
-  padding: 10px;
-}

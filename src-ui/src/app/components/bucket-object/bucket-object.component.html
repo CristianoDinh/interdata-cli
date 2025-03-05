@@ -1,27 +1,23 @@
 
-<input name="searchTerm" [(ngModel)]="searchTerm" placeholder="Filter s3 object ..." />
-
+<!--<input name="searchTerm" [(ngModel)]="searchTerm" placeholder="Filter s3 object ..." />-->
 
 <table class="table table-hover table-bordered
       caption-top">
-  <caption>List of objects</caption>
+  <caption class="caption">List of objects</caption>
   <thead class="table-success">
-    <tr>
-      <th scope="col">No.</th>
-      <th scope="col">Object</th>
-      <th scope="col">Date Modified</th>
-    </tr>
+  <tr>
+    <th scope="col">No.</th>
+    <th scope="col">Object</th>
+    <th scope="col">Date Modified</th>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let bo of bucObjs | filterObj : searchTerm, let i = index" class="table-info">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ bo.name }}</td>
-      <td>{{ bo.modifiedDate | date:'EEE, MMM d y HH:mm (zzz)' }}</td>
-    </tr>
+  <tr *ngFor="let bo of bucObjs | filterObj : searching, let i = index" class="table-info">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ bo.name }}</td>
+    <td>{{ bo.modifiedDate | date:'EEE, MMM d y HH:mm (zzz)' }}</td>
+  </tr>
   </tbody>
 </table>
-
-
-
 
 
