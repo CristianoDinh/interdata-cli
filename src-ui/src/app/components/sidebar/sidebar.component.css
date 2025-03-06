@@ -64,7 +64,7 @@
 /* 3. Progress bar */
 .storage-info {
   position: absolute;
-  bottom: 180px;
+  bottom: 160px;
   width: 80%;
 
   padding: 10px 15px 25px;
