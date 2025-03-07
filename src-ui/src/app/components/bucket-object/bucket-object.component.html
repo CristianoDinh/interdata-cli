@@ -1,23 +1,33 @@
 
 <!--<input name="searchTerm" [(ngModel)]="searchTerm" placeholder="Filter s3 object ..." />-->
 
-<table class="table table-hover table-bordered
+<div class="buckets">
+  <button *ngFor="let bu of buckets">BUCKET>>                    {{ bu.name }}</button>
+</div>
+
+<div class="objects">
+  <table class="table table-hover table-bordered
       caption-top">
-  <caption class="caption">List of objects</caption>
-  <thead class="table-success">
-  <tr>
-    <th scope="col">No.</th>
-    <th scope="col">Object</th>
-    <th scope="col">Date Modified</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let bo of bucObjs | filterObj : searching, let i = index" class="table-info">
-    <th scope="row">{{ i + 1 }}</th>
-    <td>{{ bo.name }}</td>
-    <td>{{ bo.last_modified | date:'EEE, MMM d y HH:mm (zzz)' }}</td>
-  </tr>
-  </tbody>
-</table>
+    <caption class="caption">List of objects</caption>
+    <thead class="table-success">
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Object
+           <input name="search" [(ngModel)]="filter" placeholder="Filter object ..."/>
+      </th>
+      <th scope="col">Last Modified</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bo of bucObjs | filterObj : search| filterObj : filter, let i = index" class="table-info">
+      <!--    <th scope="row">{{ i + 1 }}</th>-->
+      <td>{{ bo.id }}</td>
+      <td>{{ bo.name }}</td>
+      <td>{{ bo.last_modified }}</td>
+      <!--    <td>{{ bo.last_modified | date:'EEE, MMM d y HH:mm (zzz)' }}</td>-->
+    </tr>
+    </tbody>
+  </table>
+</div>
 
 

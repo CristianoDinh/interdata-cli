@@ -7,32 +7,27 @@ import {S3Object} from '../interface/S3Object';
 @Component({
   selector: 'app-test-api',
   imports: [
-    NgIf,
     NgForOf
   ],
   templateUrl: './test-api.component.html',
   styleUrl: './test-api.component.css'
 })
 export class TestAPIComponent implements OnInit {
-  //1. get Buckets
-   buckets: S3Bucket[] = [];
-   s3 = inject(S3Service);
+  // Danh sách buckets
+  buckets: S3Bucket[] = [];
+  objectsMap: { [key: string]: S3Object[] } = {};  // Lưu objects theo từng bucket
+  s3 = inject(S3Service);
 
   ngOnInit() {
-    this.s3.getBuckets().subscribe(data => {
-      this.buckets = data;
+    this.s3.getBuckets().subscribe(buckets => {
+      this.buckets = buckets;
+
+      // Gọi API lấy objects cho từng bucket ngay sau khi có danh sách buckets
+      this.buckets.forEach(bucket => {
+        this.s3.getBucketObjects(bucket.name).subscribe(objects => {
+          this.objectsMap[bucket.name] = objects;
+        });
+      });
     });
   }
-
-  //2. Get Objects of a specific bucket
-  objects: S3Object[] = [];
-  selectedBucket: string = '';
-
-  loadObjects(bucketName: string) {
-    this.selectedBucket = bucketName;
-    this.s3.getBucketObjects(bucketName).subscribe(data => {
-      this.objects = data;
-    });
-  }
-
 }

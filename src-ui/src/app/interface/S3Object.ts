@@ -3,5 +3,5 @@
 export interface S3Object {
   id: number,
   name: string,
-  last_modified: Date
+  last_modified: string,
 }

@@ -1,27 +1,12 @@
 
-<!--<section class="findings">-->
-<!--  <form action="">-->
-<!--    <input type="text" placeholder="Filter by name">-->
-<!--    <button class="primary" type="button">Search</button>-->
-<!--  </form>-->
-<!--</section>-->
 <div class="home">
   <section class="findings">
-    <input #searchInput name="searchTerm" [(ngModel)]="searchTerm" placeholder="Filter s3 object ..." autofocus/>
+    <input #searchInput name="searchTerm" [(ngModel)]="searchTerm" placeholder="Search S3 object . . ." autofocus/>
   </section>
 
   <section class="results">
-    <app-bucket-object [bucObjs]="bucketObjectList" [searching]="searchTerm"></app-bucket-object>
+    <app-bucket-object [buckets]="bucketList" [bucObjs]="bucketObjectList" [search]="searchTerm"></app-bucket-object>
   </section>
 </div>
 
-
-
-<!--<div class="object">-->
-<!--  <ul *ngFor="let b of bucketObjectList">-->
-<!--    <p>{{ b.id }}</p>-->
-<!--    <h2>{{ b.name }}</h2>-->
-<!--    <h3>{{ b.modifiedDate }}</h3>-->
-<!--  </ul>-->
-<!--</div>-->
 

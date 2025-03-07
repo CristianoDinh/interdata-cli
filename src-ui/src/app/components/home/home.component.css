@@ -12,7 +12,8 @@
 /* 1. Decorate searching bar */
 .findings {
   padding-top: 15px;
-  padding-left: 300px;
+  /*padding-left: 780px;*/
+  padding-left: 100px;
 }
 
 .results {
