@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {BucketObject} from '../interface/bucketObject';
+import {S3Object} from '../interface/S3Object';
 
 @Pipe({
   name: 'filterObj'
 })
 export class FilterObjPipe implements PipeTransform {
 
-  transform(objects: BucketObject[], searchTerm: string): BucketObject[] {
+  transform(objects: S3Object[], searchTerm: string): S3Object[] {
     if(!searchTerm) {
       return objects;
     }

@@ -1,6 +1,8 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {S3Service} from '../services/s3.service';
 import {NgForOf, NgIf} from '@angular/common';
+import {S3Bucket} from '../interface/S3Bucket';
+import {S3Object} from '../interface/S3Object';
 
 @Component({
   selector: 'app-test-api',
@@ -13,7 +15,7 @@ import {NgForOf, NgIf} from '@angular/common';
 })
 export class TestAPIComponent implements OnInit {
   //1. get Buckets
-   buckets: any[] = [];
+   buckets: S3Bucket[] = [];
    s3 = inject(S3Service);
 
   ngOnInit() {
@@ -23,7 +25,7 @@ export class TestAPIComponent implements OnInit {
   }
 
   //2. Get Objects of a specific bucket
-  objects: any[] = [];
+  objects: S3Object[] = [];
   selectedBucket: string = '';
 
   loadObjects(bucketName: string) {

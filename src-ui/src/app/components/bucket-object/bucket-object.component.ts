@@ -1,5 +1,5 @@
 import {Component, Input, signal} from '@angular/core';
-import {BucketObject} from '../../interface/bucketObject';
+import {S3Object} from '../../interface/S3Object';
 import {DatePipe, NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {FilterObjPipe} from '../../pipes/filter-obj.pipe';
@@ -16,6 +16,6 @@ import {FilterObjPipe} from '../../pipes/filter-obj.pipe';
 })
 export class BucketObjectComponent {
   @Input() searching !: string;
-  @Input() bucObjs!: BucketObject[];
+  @Input() bucObjs!: S3Object[];
 
 }

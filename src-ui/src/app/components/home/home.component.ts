@@ -1,9 +1,10 @@
 import {AfterViewInit, Component, ElementRef, inject, ViewChild} from '@angular/core';
-import {BucketObject} from '../../interface/bucketObject';
-import {ObjectService} from '../../services/object.service';
+import {S3Object} from '../../interface/S3Object';
+import {SampleService} from '../../services/sample.service';
 import {NgForOf} from '@angular/common';
 import {BucketObjectComponent} from '../bucket-object/bucket-object.component';
 import {FormsModule} from '@angular/forms';
+
 
 @Component({
   selector: 'app-home',
@@ -20,12 +21,12 @@ export class HomeComponent implements AfterViewInit {
     this.searchInput.nativeElement.focus(); // Đặt con trỏ vào ô input khi component tải xong
   }
 
-  bucketObjectList: BucketObject[] = [];
-  objectService: ObjectService = inject(ObjectService);
+  bucketObjectList: S3Object[] = [];
+  sampleService: SampleService = inject(SampleService);
   searchTerm !: string;
 
   constructor() {
-    this.bucketObjectList = this.objectService.getAllBucketObjects();
+    this.bucketObjectList = this.sampleService.getAllBucketObjects();
   }
 
 
