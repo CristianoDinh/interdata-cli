@@ -5,6 +5,49 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # Cho phép CORS để Angular có thể gọi API
 
+# 1. API HomePage
+@app.route('/')
+def home():
+    return """
+    <html>
+        <head>
+            <title>Flask API</title>
+            <style>
+                body { font-family: cursive ; font-size: 60px; text-align: center; 
+                        margin-top: 10px; background: gainsboro; }
+                }
+                h1 { color: #333; }
+                ul { list-style-type: none; padding: 5px; font-family: monospace; }
+                li { margin: 0; }
+                a { text-decoration: none; color: blue; font-size: 24px; }
+                a:hover { text-decoration: underline; }
+
+                /* Đầu tiên, tạo keyframes cho hiệu ứng lắc */
+                @keyframes shake {
+                  0% { transform: translateX(0); }
+                  25% { transform: translateX(-5px); }
+                  50% { transform: translateX(5px); }
+                  75% { transform: translateX(-5px); }
+                  100% { transform: translateX(0); }
+                }            
+                /* Sau đó, áp dụng hiệu ứng lắc cho text */
+                .shake-text {
+                  display: inline-block;
+                  animation: shake 0.5s ease-in-out infinite;
+                }
+            </style>
+        </head>
+        <body>
+            <h1 class="shake-text">Flask API is Running!</h1>
+            <ul>
+                <li><a href="/buckets">📂 List all Buckets</a></li>
+                <li><a href="/ex-bucket/objects">📄 List all Objects (replace 'ex-bucket')</a></li>
+            </ul>
+        </body>
+    </html>
+    """
+
+
 # 2. API lấy danh sách buckets
 @app.route('/buckets', methods=['GET'])
 def list_buckets():
@@ -83,48 +126,6 @@ def list_objects(bucket_name):
         return jsonify(objects)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-# 1. API HomePage
-@app.route('/')
-def home():
-    return """
-    <html>
-        <head>
-            <title>Flask API</title>
-            <style>
-                body { font-family: cursive ; font-size: 60px; text-align: center; 
-                        margin-top: 10px; background: gainsboro; }
-                }
-                h1 { color: #333; }
-                ul { list-style-type: none; padding: 5px; font-family: monospace; }
-                li { margin: 0; }
-                a { text-decoration: none; color: blue; font-size: 24px; }
-                a:hover { text-decoration: underline; }
-                
-                /* Đầu tiên, tạo keyframes cho hiệu ứng lắc */
-                @keyframes shake {
-                  0% { transform: translateX(0); }
-                  25% { transform: translateX(-5px); }
-                  50% { transform: translateX(5px); }
-                  75% { transform: translateX(-5px); }
-                  100% { transform: translateX(0); }
-                }            
-                /* Sau đó, áp dụng hiệu ứng lắc cho text */
-                .shake-text {
-                  display: inline-block;
-                  animation: shake 0.5s ease-in-out infinite;
-                }
-            </style>
-        </head>
-        <body>
-            <h1 class="shake-text">Flask API is Running!</h1>
-            <ul>
-                <li><a href="/buckets">📂 List all Buckets</a></li>
-                <li><a href="/ex-bucket/objects">📄 List all Objects (replace 'ex-bucket')</a></li>
-            </ul>
-        </body>
-    </html>
-    """
 
 
 if __name__ == '__main__':
