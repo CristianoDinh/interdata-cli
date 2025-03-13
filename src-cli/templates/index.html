@@ -10,7 +10,7 @@
             a { text-decoration: none; color: blue; font-size: 24px; }
             a:hover { text-decoration: underline; }
 
-            /* Đầu tiên, tạo keyframes cho hiệu ứng lắc */
+            /* Firstly, create keyframes for shaking effect */
             @keyframes shake {
                 0% { transform: translateX(0); }
                 25% { transform: translateX(-5px); }
@@ -19,7 +19,7 @@
                 100% { transform: translateX(0); }
             }
 
-            /* Sau đó, áp dụng hiệu ứng lắc cho text */
+            /* Then, apply effect for Text */
             .shake-text {
                 display: inline-block;
                 animation: shake 0.5s ease-in-out infinite;
