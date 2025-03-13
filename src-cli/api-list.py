@@ -1,74 +1,36 @@
 import subprocess
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Cho phép CORS để Angular có thể gọi API
+CORS(app)  #Enable CORS that Frontend could call API.
 
-# 1. API HomePage
+#1. API HomePage
 @app.route('/')
 def home():
-    return """
-    <html>
-        <head>
-            <title>Flask API</title>
-            <style>
-                body { font-family: cursive ; font-size: 60px; text-align: center; 
-                        margin-top: 10px; background: gainsboro; }
-                }
-                h1 { color: #333; }
-                ul { list-style-type: none; padding: 5px; font-family: monospace; }
-                li { margin: 0; }
-                a { text-decoration: none; color: blue; font-size: 24px; }
-                a:hover { text-decoration: underline; }
+    return render_template("index.html")
 
-                /* Đầu tiên, tạo keyframes cho hiệu ứng lắc */
-                @keyframes shake {
-                  0% { transform: translateX(0); }
-                  25% { transform: translateX(-5px); }
-                  50% { transform: translateX(5px); }
-                  75% { transform: translateX(-5px); }
-                  100% { transform: translateX(0); }
-                }            
-                /* Sau đó, áp dụng hiệu ứng lắc cho text */
-                .shake-text {
-                  display: inline-block;
-                  animation: shake 0.5s ease-in-out infinite;
-                }
-            </style>
-        </head>
-        <body>
-            <h1 class="shake-text">Flask API is Running!</h1>
-            <ul>
-                <li><a href="/buckets">📂 List all Buckets</a></li>
-                <li><a href="/ex-bucket/objects">📄 List all Objects (replace 'ex-bucket')</a></li>
-            </ul>
-        </body>
-    </html>
-    """
-
-
-# 2. API lấy danh sách buckets
+#2. API get list Buckets
 @app.route('/buckets', methods=['GET'])
 def list_buckets():
     try:
-        # Gọi CLI để lấy danh sách bucket
+        # Run subprocess cli to get list buckets
         result = subprocess.run(['python', 'list_v3.py', '--allBuckets'], capture_output=True, text=True)
 
-        # Kiểm tra lỗi khi chạy subprocess
+        # Check whether error running subprocess
         if result.returncode != 0:
             return jsonify({'error': result.stderr.strip()}), 500
 
-        # Chuyển đổi output thành danh sách bucket
+        # Convert result(output) into each line list
         lines = result.stdout.strip().split("\n")
 
-        # Tìm vị trí header trong output
+        # Find header index to eliminate content
         header_index = next(
             (i for i, line in enumerate(lines) if "Bucket Name" in line), None)
         if header_index is None or header_index + 1 >= len(lines):
-            return jsonify([])  # Trả về dữ liệu rỗng
+            return jsonify([])  # Return empty data
 
-        # Lấy danh sách buckets
+        # Get list buckets from output
         buckets = []
         for line in lines[header_index + 1:]:
             parts = line.split("|")
@@ -83,31 +45,30 @@ def list_buckets():
                      "created_at": created_at
                      }
                 )
-
         return jsonify(buckets)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# 3. API lấy danh sách objects trong bucket
+# 3. API get list objects in a specific Bucket
 @app.route('/<bucket_name>/objects', methods=['GET'])
 def list_objects(bucket_name):
     try:
-        # Gọi CLI với bucket_name
+        # Run subprocess cli to get list objects(in a 'bucket_name')
         result = subprocess.run(['python', 'list_v3.py', bucket_name, '--allObjects'], capture_output=True, text=True)
 
-        # Kiểm tra lỗi khi chạy subprocess
+        # Check whether error running subprocess
         if result.returncode != 0:
             return jsonify({'error': result.stderr.strip()}), 500
 
-        # Chuyển đổi output thành danh sách objects
+        # Convert result(output) into each line list
         lines = result.stdout.strip().split("\n")
 
-        # Tìm vị trí header trong output
+        # Find header index to eliminate content
         header_index = next((i for i, line in enumerate(lines) if "Object Name" in line), None)
         if header_index is None or header_index + 1 >= len(lines):
-            return jsonify([])  # Không có dữ liệu
+            return jsonify([])  # Return empty data
 
-        # Lấy danh sách objects từ output
+        # Get list objects from output
         objects = []
         for line in lines[header_index + 1:]:
             parts = line.split("|")
@@ -122,7 +83,6 @@ def list_objects(bucket_name):
                         "last_modified": last_modified
                     }
                 )
-
         return jsonify(objects)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
